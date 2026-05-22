@@ -103,7 +103,7 @@ def initialize_database():
             p_hash = hash_password(pwd)
             jwt_sec = uuid.uuid4().hex
             cursor.execute(
-                "INSERT INTO users (username, password_hash, role, department, jwt_secret) VALUES (?, ?, ?, ?, ?);",
+                "INSERT OR IGNORE INTO users (username, password_hash, role, department, jwt_secret) VALUES (?, ?, ?, ?, ?);",
                 (uname, p_hash, role, dept, jwt_sec)
             )
         conn.commit()
