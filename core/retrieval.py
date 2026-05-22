@@ -120,6 +120,17 @@ def retrieve_context(query_text: str, user_role: str, user_dept: str) -> dict:
                 
         retrieved_chunks = vector_results
 
+        # Content-level RBAC: block executive-only records for non-executive roles
+        filtered_chunks = []
+        for doc in retrieved_chunks:
+            content = doc["text"].lower()
+            if "executive" in content or "project omega" in content:
+                if user_role != "Executive":
+                    restricted_count += 1
+                    continue
+            filtered_chunks.append(doc)
+        retrieved_chunks = filtered_chunks
+
     # Re-ranking & de-duplication
     unique_chunks = []
     seen_texts = set()
