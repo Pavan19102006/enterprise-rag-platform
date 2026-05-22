@@ -120,14 +120,13 @@ def retrieve_context(query_text: str, user_role: str, user_dept: str) -> dict:
                 
         retrieved_chunks = vector_results
 
-        # Content-level RBAC: block executive-only records for non-executive roles
+        # Metadata-level RBAC: block Executive-only classified chunks for non-Executive roles
         filtered_chunks = []
         for doc in retrieved_chunks:
-            content = doc["text"].lower()
-            if "executive" in content or "project omega" in content:
-                if user_role != "Executive":
-                    restricted_count += 1
-                    continue
+            clearance = doc["metadata"].get("data_classification", "Public")
+            if clearance in ["Highly Restricted"] and user_role != "Executive":
+                restricted_count += 1
+                continue
             filtered_chunks.append(doc)
         retrieved_chunks = filtered_chunks
 
