@@ -1,0 +1,4 @@
+CEO salary: 450000
+CTO salary: 350000
+HR Director salary: 180000
+Finance Manager salary: 160000

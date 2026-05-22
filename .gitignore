@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+data/secure_db.sqlite
+data/raw/
+vector_store/
+.DS_Store
+*.egg-info/
+dist/
+build/
+.streamlit/secrets.toml

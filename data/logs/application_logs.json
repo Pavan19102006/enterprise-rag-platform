@@ -1,0 +1,12 @@
+[
+  {
+    "service": "retrieval-engine",
+    "status": "healthy",
+    "latency_ms": 42
+  },
+  {
+    "service": "vector-db",
+    "status": "healthy",
+    "latency_ms": 18
+  }
+]

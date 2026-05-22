@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2025-05-01T10:15:00",
+    "event": "failed_login",
+    "department": "finance",
+    "severity": "medium"
+  },
+  {
+    "timestamp": "2025-05-02T11:30:00",
+    "event": "unauthorized_access_attempt",
+    "department": "executive",
+    "severity": "high"
+  }
+]

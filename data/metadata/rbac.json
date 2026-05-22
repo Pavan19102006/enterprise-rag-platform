@@ -1,0 +1,65 @@
+{
+  "finance_q1.txt": [
+    "Finance",
+    "Executive"
+  ],
+  "finance_q2.txt": [
+    "Finance",
+    "Executive"
+  ],
+  "budget_report.csv": [
+    "Finance",
+    "Executive"
+  ],
+  "employee_salaries.txt": [
+    "HR",
+    "Executive"
+  ],
+  "hr_policy.txt": [
+    "HR",
+    "Executive"
+  ],
+  "project_alpha.txt": [
+    "Engineer",
+    "Executive"
+  ],
+  "system_architecture.txt": [
+    "Engineer",
+    "Executive"
+  ],
+  "compliance_audit.txt": [
+    "Auditor",
+    "Executive"
+  ],
+  "security_controls.txt": [
+    "Auditor",
+    "Executive"
+  ],
+  "security_logs.json": [
+    "Auditor",
+    "Executive"
+  ],
+  "application_logs.json": [
+    "Engineer",
+    "Executive"
+  ],
+  "security_policy.txt": [
+    "Intern",
+    "HR",
+    "Finance",
+    "Engineer",
+    "Auditor",
+    "Executive"
+  ],
+  "access_control.txt": [
+    "Intern",
+    "HR",
+    "Finance",
+    "Engineer",
+    "Auditor",
+    "Executive"
+  ],
+  "executive_budget.txt": [
+    "Executive"
+  ]
+}

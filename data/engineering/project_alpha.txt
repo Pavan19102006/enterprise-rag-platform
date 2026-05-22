@@ -1,0 +1,3 @@
+Project Alpha uses PostgreSQL for transactional storage.
+AES-256 encryption is enabled for sensitive records.
+Kubernetes is used for orchestration.

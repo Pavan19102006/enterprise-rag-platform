@@ -1,0 +1,3 @@
+Interns may access only public documents.
+Finance staff may access finance and policy records.
+Executives may access all enterprise records.
