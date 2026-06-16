@@ -1,1 +1,1 @@
-# Enterprise RAG Platform - Core Package
+# Vertex Corp Enterprise RAG Platform - Core Module
