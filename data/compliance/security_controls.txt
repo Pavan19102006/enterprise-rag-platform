@@ -1,3 +1,0 @@
-Prompt injection detection is enabled.
-DLP filtering prevents sensitive data leakage.
-All retrieval operations are logged.

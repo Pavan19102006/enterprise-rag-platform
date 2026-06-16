@@ -1,3 +1,0 @@
-Employees must not disclose confidential company information externally.
-Executive financial documents require elevated clearance.
-All AI-generated responses must include citations.

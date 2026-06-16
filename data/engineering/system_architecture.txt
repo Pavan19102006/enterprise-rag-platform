@@ -1,3 +1,0 @@
-The enterprise platform uses a hybrid RAG architecture.
-Vector retrieval is powered by ChromaDB.
-Authentication is handled through JWT tokens.

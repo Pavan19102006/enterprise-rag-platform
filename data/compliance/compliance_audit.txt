@@ -1,3 +1,0 @@
-Finance department had 3 compliance violations in Q1.
-Engineering department passed all infrastructure audits.
-Sensitive documents require RBAC filtering.
