@@ -6,7 +6,12 @@ from core.database import initialize_database, verify_password, get_db_connectio
 from core.auth import authenticate_user, verify_token, check_classification_access, get_allowed_classifications
 from core.guardrails import check_prompt_injection, redact_sensitive_data
 from core.retrieval import retrieve_context, classify_query_intent
-from core.orchestrator import generate_grounded_response, parse_citations_and_calculate_confidence
+from core.orchestrator import (
+    generate_grounded_response,
+    parse_citations,
+    validate_citations,
+    calculate_confidence,
+)
 
 class TestEnterpriseRAGPlatform(unittest.TestCase):
     
@@ -108,23 +113,28 @@ class TestEnterpriseRAGPlatform(unittest.TestCase):
             {
                 "score": 0.95,
                 "text": "Maternity leave provides 16 fully paid weeks.",
-                "metadata": {"filename": "hr_policy.pdf", "chunk_index": 2, "data_classification": "HR Confidential"}
+                "metadata": {"filename": "hr_policy.pdf", "chunk_id": "chunk-2", "page_number": 1, "data_classification": "HR Confidential"}
             }
         ]
         
         # 1. Honest citation matches retrieved chunks
-        response_valid = "Maternity leave is structured as 16 paid weeks [Doc: hr_policy.pdf, Chunk: 2]."
-        cleaned, conf, citations = parse_citations_and_calculate_confidence(response_valid, mock_chunks)
+        response_valid = "Maternity leave is structured as 16 paid weeks [Source: Page 1, Chunk chunk-2]."
+        citations = parse_citations(response_valid)
+        cleaned, accuracy, coverage, valid_citations = validate_citations(citations, mock_chunks, response_valid)
+        conf = calculate_confidence(mock_chunks, accuracy, coverage)
+        
         self.assertEqual(cleaned, response_valid)
         self.assertTrue(conf > 0.80)
-        self.assertEqual(len(citations), 1)
+        self.assertEqual(len(valid_citations), 1)
         
         # 2. Fabricated citation gets parsed out
-        response_bad = "Maternity leave is structured as 16 paid weeks [Doc: hr_policy.pdf, Chunk: 2] and salary is capped [Doc: salary_secrets.pdf, Chunk: 0]."
-        cleaned, conf, citations = parse_citations_and_calculate_confidence(response_bad, mock_chunks)
-        self.assertNotIn("salary_secrets.pdf", cleaned)
-        self.assertIn("hr_policy.pdf", cleaned)
-        self.assertEqual(len(citations), 1) # Only 1 valid remains
+        response_bad = "Maternity leave is structured as 16 paid weeks [Source: Page 1, Chunk chunk-2] and salary is capped [Source: Page 2, Chunk chunk-99]."
+        citations_bad = parse_citations(response_bad)
+        cleaned_bad, accuracy_bad, coverage_bad, valid_citations_bad = validate_citations(citations_bad, mock_chunks, response_bad)
+        
+        self.assertNotIn("chunk-99", cleaned_bad)
+        self.assertIn("chunk-2", cleaned_bad)
+        self.assertEqual(len(valid_citations_bad), 1) # Only 1 valid remains
 
 if __name__ == "__main__":
     unittest.main()
